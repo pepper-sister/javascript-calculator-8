@@ -17,7 +17,9 @@ class App {
         if (S !== -1 && E !== -1) {
             const DIV = STR.substring(S, E); // 커스텀 구분자 추출
             const NEW_STR = STR.substring(E + 2); // 숫자와 구분자만 있는 문자열 생성
-            NUM = NEW_STR.split(DIV);
+
+            // 변수와 함께 정규 표현식을 만들기 위해 RegExp() 객체 생성
+            NUM = NEW_STR.split(new RegExp(`,|:|${DIV}`));
         }
 
         // 배열을 돌면서 각 요소를 숫자로 결과에 덧셈
