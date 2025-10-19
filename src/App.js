@@ -32,6 +32,7 @@ class App {
             // 배열을 돌면서 각 요소를 숫자로 결과에 덧셈
             let result = 0;
             num_array.forEach((element) => {
+                if (element === '') element = 0; // 숫자가 공백인 경우 0으로 처리
                 result += Number(element);
             });
 
