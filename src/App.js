@@ -17,8 +17,11 @@ class App {
             // 커스텀 구분자 사용시
             const ERROR_NUM = -1;
             if (start_idx !== ERROR_NUM && end_idx !== ERROR_NUM) {
-                const custom_delimiter = input_str.substring(start_idx + 1, end_idx); // 커스텀 구분자 추출
+                let custom_delimiter = input_str.substring(start_idx + 1, end_idx); // 커스텀 구분자 추출
                 const num_part = input_str.substring(end_idx + 2); // 숫자와 구분자만 있는 문자열 생성
+
+                // 커스텀 구분자가 메타문자인 경우, \를 한번 더 작성하여 escape
+                custom_delimiter = custom_delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
                 // 변수와 함께 정규 표현식을 만들기 위해 RegExp() 객체 생성
                 num_array = num_part.split(new RegExp(`,|:|${custom_delimiter}`));
