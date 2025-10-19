@@ -18,6 +18,8 @@ class App {
                 if (end_idx === ERROR_NUM) throw new Error('커스텀 구분자 형식이 잘못되었습니다.');
 
                 let custom_delimiter = input_str.substring(2, end_idx); // 커스텀 구분자 추출
+                if (custom_delimiter === '') throw new Error('커스텀 구분자를 입력하지 않았습니다.'); // 커스텀 구분자를 입력하지 않은 경우
+
                 const num_part = input_str.substring(end_idx + 2); // 숫자와 구분자만 있는 문자열 생성
 
                 // 커스텀 구분자가 메타문자인 경우, \를 한번 더 작성하여 escape
