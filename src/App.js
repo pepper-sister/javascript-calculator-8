@@ -7,17 +7,17 @@ class App {
             const input_str = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
             // 쉼표와 콜론 두 가지 기본 구분자 사용
-            let num_array = input_str.split(/,|:/);
-
-            // 커스텀 구분자 시작(start_idx), 종료(end_idx) 인덱스 찾기
-            // / 또는 \n이 문자열에 포함되지 않으면 -1 반환
-            const start_idx = input_str.lastIndexOf('/');
-            const end_idx = input_str.indexOf('\\n'); // 문자 \를 나타내기 위해 \를 한번 더 작성하여 escape
+            let num_array;
 
             // 커스텀 구분자 사용시
             const ERROR_NUM = -1;
-            if (start_idx !== ERROR_NUM && end_idx !== ERROR_NUM) {
-                let custom_delimiter = input_str.substring(start_idx + 1, end_idx); // 커스텀 구분자 추출
+            // //로 시작할 때 (커스텀 구분자 형식)
+            if (input_str.startsWith('//')) {
+                // 커스텀 구분자 종료 인덱스(end_idx) 찾기
+                const end_idx = input_str.indexOf('\\n'); // 문자 \를 나타내기 위해 \를 한번 더 작성하여 escape
+                if (end_idx === ERROR_NUM) throw new Error('커스텀 구분자 형식이 잘못되었습니다.');
+
+                let custom_delimiter = input_str.substring(2, end_idx); // 커스텀 구분자 추출
                 const num_part = input_str.substring(end_idx + 2); // 숫자와 구분자만 있는 문자열 생성
 
                 // 커스텀 구분자가 메타문자인 경우, \를 한번 더 작성하여 escape
@@ -25,6 +25,8 @@ class App {
 
                 // 변수와 함께 정규 표현식을 만들기 위해 RegExp() 객체 생성
                 num_array = num_part.split(new RegExp(`,|:|${custom_delimiter}`));
+            } else {
+                num_array = input_str.split(/,|:/);
             }
 
             // 배열을 돌면서 각 요소를 숫자로 결과에 덧셈
