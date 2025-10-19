@@ -33,19 +33,13 @@ class App {
             let result = 0;
             num_array.forEach((element) => {
                 if (element === '') element = 0; // 숫자가 공백인 경우 0으로 처리
-                result += Number(element);
+                const num = Number(element);
+                if (isNaN(num)) throw new Error('숫자가 아닌 값이 포함되었습니다.');
+                if (num < 0) throw new Error('음수는 입력할 수 없습니다.');
+                result += num;
             });
 
-            if (isNaN(result)) {
-                // Error1: 결과가 NaN인 경우
-                throw new Error('결과 값이 NaN입니다.');
-            } else if (result < 0) {
-                // Error2: 결과가 음수인 경우
-                throw new Error('결과 값이 음수입니다.');
-            } else {
-                // 결과 출력
-                MissionUtils.Console.print(`결과 : ${result}`);
-            }
+            MissionUtils.Console.print(`결과 : ${result}`);
         } catch (error) {
             // Error 메시지 출력
             MissionUtils.Console.print(`[ERROR] : ${error.message}`);
