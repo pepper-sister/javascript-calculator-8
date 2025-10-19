@@ -48,6 +48,7 @@ class App {
         } catch (error) {
             // Error 메시지 출력
             MissionUtils.Console.print(`[ERROR] : ${error.message}`);
+            throw new Error(`[ERROR] : ${error.message}`);
         }
     }
 }
