@@ -19,6 +19,7 @@ class App {
 
                 let custom_delimiter = input_str.substring(2, end_idx); // 커스텀 구분자 추출
                 if (custom_delimiter === '') throw new Error('커스텀 구분자를 입력하지 않았습니다.'); // 커스텀 구분자를 입력하지 않은 경우
+                if (custom_delimiter.length >= 2) throw new Error('커스텀 구분자는 하나의 문자만 입력할 수 있습니다.'); // 커스텀 구분자의 길이가 2이상인 경우
 
                 const num_part = input_str.substring(end_idx + 2); // 숫자와 구분자만 있는 문자열 생성
 
@@ -34,7 +35,7 @@ class App {
             // 배열을 돌면서 각 요소를 숫자로 결과에 덧셈
             let result = 0;
             num_array.forEach((element) => {
-                if (element === '') element = 0; // 숫자가 공백인 경우 0으로 처리
+                // if (element === '') element = 0; // 숫자가 공백인 경우 0으로 처리
                 const num = Number(element);
                 if (isNaN(num)) throw new Error('숫자가 아닌 값이 포함되었습니다.');
                 if (num < 0) throw new Error('음수는 입력할 수 없습니다.');
