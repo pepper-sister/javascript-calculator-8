@@ -21,7 +21,7 @@ class App {
                 let custom_delimiter = input_str.substring(START_IDX, end_idx); // 커스텀 구분자 추출
                 if (custom_delimiter === '') throw new Error('커스텀 구분자를 입력하지 않았습니다.'); // 커스텀 구분자를 입력하지 않은 경우
                 if (custom_delimiter.length >= 2) throw new Error('커스텀 구분자는 하나의 문자만 입력할 수 있습니다.'); // 커스텀 구분자의 길이가 2이상인 경우
-                if (/^\d$/.test(custom_delimiter)) throw new Error('커스텀 구분자에 숫자는 사용할 수 없습니다.');
+                if (/^\d$/.test(custom_delimiter)) throw new Error('커스텀 구분자에 숫자는 사용할 수 없습니다.'); // 커스텀 구분자가 숫자인 경우
 
                 const num_part = input_str.substring(end_idx + START_IDX); // 숫자와 구분자만 있는 문자열 생성
 
